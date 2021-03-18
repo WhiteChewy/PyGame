@@ -11,14 +11,15 @@ class Player(pygame.sprite.Sprite):
         self.image.fill(GREEN)  # "закрасим" его зеленым цветом
         self.rect = self.image.get_rect()  # rect - это сокращенное от rectangle
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
+        self.move = 1
 
     # метод update определяет движение объекта
     def update(self):
-        # в данном случае каждый шаг цикла объект смещается на 5 координат в право
-        self.rect.x += 5
-        # если левый край спрайта становится больше чем ширина установить координату правого край 0
-        if self.rect.left > WIDTH:
-            self.rect.right = 0
+        self.rect.x += self.move*5
+        if self.rect.right == WIDTH:
+            self.move = -1
+        elif self.rect.left == 0:
+            self.move = 1
 
 
 # блок определения размеров окна и фпс
